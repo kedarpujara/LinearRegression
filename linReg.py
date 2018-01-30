@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np 
-import matplot.pylot as plt 
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 
 def LinearRegression():
 	
 	#---Get the Data---#
-	df = pd.read_cvs('USA_Housing.csv')
+	df = pd.read_csv('USA_Housing.csv')
 
 	df.head()
 	df.describe()
@@ -43,13 +43,15 @@ def LinearRegression():
 	lm.fit(x_train, y_train)  
 
 	print(lm.intercept_)
-	print(lm.coeff_)
+	#print(lm.coeff_)
 
 
 	#---Create a Coefficient DataFrame---#
 	# This returns a dataframe that correlates one unit increase in
 	# the columns mentioned earlier for X with dollars
-	cdf = pd.DataFrame(lm.coeff_, x.columns, column = ['Coeff'])
+	#cdf = pd.DataFrame(lm.coeff_, x.columns, column = ['Coeff'])
+
+LinearRegression()
 
 
 
