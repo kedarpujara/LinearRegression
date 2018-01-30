@@ -33,7 +33,7 @@ def LinearRegression():
 
 
 	#---Train the model---#
-	from sklearn.cross_validation import train_test_split
+	from sklearn.model_selection import train_test_split
 
 	x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=101)
 
@@ -42,14 +42,40 @@ def LinearRegression():
 	lm = LinearRegression()
 	lm.fit(x_train, y_train)  
 
-	print(lm.intercept_)
-	#print(lm.coeff_)
+	#print(lm.intercept_)
+	#print(lm.coef_)
 
 
 	#---Create a Coefficient DataFrame---#
 	# This returns a dataframe that correlates one unit increase in
 	# the columns mentioned earlier for X with dollars
-	#cdf = pd.DataFrame(lm.coeff_, x.columns, column = ['Coeff'])
+	cdf = pd.DataFrame(lm.coef_, X.columns, columns = ['Coefficient'])
+	
+
+	#---Predictions from the Model---#
+	predictions = lm.predict(x_test)
+	plt.scatter(y_test, predictions)
+
+	sns.distplot(y_test-predictions)
+
+
+
+	#---Do Error Analysis---#
+	from sklearn import metrics
+
+	print("MAE:", metrics.mean_absolute_error(y_test, predictions))
+	print("MSE:", metrics.mean_squared_error(y_test, predictions))
+	print("RMSE:", np.sqrt(metrics.mean_squared_error(y_test, predictions)))
+
+
+
+
+	#---Show the graphs---#
+	# Commment out this line if you don't want to show the graphs. 
+	# Or comment out the lines with sns or plt if you don't want to 
+	# show particular graphs
+	plt.show()
+
 
 LinearRegression()
 
